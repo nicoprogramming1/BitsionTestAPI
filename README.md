@@ -1,26 +1,36 @@
 # Bitsion-technical-test-WN
-This project is developed for a Bitsion SA technical test - WN
+This project is developed for a Bitsion technical test - Author: WN
 
 # Decisiones Técnicas
 
 A continuación se exponen aquellas decisiones técnicas implementadas a lo largo del desarrollo y el presente análisis, junto con las observaciones que llevaron a considerarlas.
 
-### Estado (state active / inactive)
+### SQLServer
 
-El estado de un cliente será implementado en la BD como un atributo que indica si el cliente está activo o ha sufrido una eliminación lógica del sistema.
-Esto conlleva que dicho cliente será ignorado por las consultas realizadas contra el backend (consultar cliente, listar clientes) resultando en un 404.
-De esta manera no es de interés explícito para el front (no está asociado a formularios) y será predeterminado true al momento del registro de un nuevo cliente.
+La base de datos será SQLServer ya que es un motor de base de datos relacional robusto e integrado perfectamente con .NET y Entity Framework Core y en especial Visual Studio, lo que permite una fácil configuración y usabilidad.
+
+### DbContext
+
+Se utilizará **DBContext** del paquete **Microsoft.EntityFrameworkCore** en la capa **Repository** para mantener una conexión con la DB, mapear entidades, trackear cambios y acceder a operaciones CRUD. Al estar trabajando con SQLServer el proveedor utilizado será **Microsoft.EntityFrameworkCore.SqlServer**. Esta herramienta estará representada en la carpeta Data en la clase ApplicationDbContext quien hereda del DbContext.
+
+### CodeFirst
+
+Para el desarrollo los modelos serán definidos mediante clases en C#.
+
+### isDeleted
+
+Este atributo en un cliente indica si el cliente ha sido eliminado del sistema en caso de true. Un cliente se registra con este atributo false por defecto y al momento de la eliminación lógica se cambia a true, esto conlleva que dicho cliente será ignorado por las consultas realizadas contra el backend (consultar cliente, listar clientes) resultando en un 404. El front puede abstraerse totalmente de este atributo.
 
 ### Entidades auxiliares o secundarias
 
-Respecto a entidades tales como Roles, Phone, Nationality y Email.
+Respecto a entidades tales como Roles, Phone, Nationality, State y Email.
 Plantié tres posibilidades para su implementación, quedándome con la primera:
 
 **- Usar tablas en la base de datos (Con FK y normalización)**
-Motivación: es la forma más escalable y flexible, en especial para Roles. Si éstos luego deben ser modificados o agregados nuevos es el mejor enfoque.
+Creo que es la forma más escalable y flexible, en especial para Roles. Si éstos luego deben ser modificados o agregados nuevos, considero es el mejor enfoque, por más que en un proyecto pequeño incremente el tamaño del mismo y la cantidad de código utilizado.
 
 - Usar enum
-Motivación: muy rápido y sencillo de implementar aunque adhiere rigidez y en caso de querer escalarlo habría que tocar uno por uno en cada capa. Además puede dar problemas de consistencia.
+Aunque es muy rápido y sencillo de implementar adhiere rigidez y en caso de querer escalarlo habría que tocar uno por uno en cada capa. Además puede dar problemas de consistencia.
 
 - Usar una clase de roles (sin tabla)
-Motivación: es sencillo de implementar pero pero no es ideal si se quiere una base de datos normalizada o más avanzada con relaciones que deberían ser representadas.
+No es ideal si se quiere una base de datos normalizada o más avanzada con relaciones que deberían ser representadas.
