@@ -51,7 +51,8 @@ namespace BitsionTest.API.Services.Implementation
             {
                 new Claim(ClaimTypes.NameIdentifier, user?.Id ?? string.Empty),
                 new Claim(ClaimTypes.Email, user?.Email ?? string.Empty),
-                new Claim(ClaimTypes.Role, "User")
+                new Claim(ClaimTypes.Role, "User"),
+                new Claim(ClaimTypes.Name, user?.Email ?? string.Empty) // el email es el username
             };
 
             var roles = await _userManager.GetRolesAsync(user);
