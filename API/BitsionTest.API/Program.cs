@@ -29,9 +29,13 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 });
 
 // Identity
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+{
+    options.User.RequireUniqueEmail = true; // El email debe ser único
+    options.User.AllowedUserNameCharacters = null; // Elimina restricciones en UserName
+})
 .AddEntityFrameworkStores<ApplicationDbContext>()
-    .AddDefaultTokenProviders();
+.AddDefaultTokenProviders();
 
 
 // Services  
@@ -41,6 +45,7 @@ builder.Services.AddScoped<ICurrentUserService, CurrentUserServiceImpl>();
 
 // Repositories
 builder.Services.AddScoped<IClientRepository, ClientRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepositoryImpl>();
 
 
 // AutoMapper
