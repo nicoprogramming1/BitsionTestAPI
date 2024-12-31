@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BitsionTest.API.Controllers
 {
-
+    [ApiController]
     [Route("api/")]
     public class AuthController : ControllerBase
     {
@@ -22,6 +22,10 @@ namespace BitsionTest.API.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Register([FromBody] UserRegisterRequest request)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);  // Los captura el "../Exceptions/GlobalExceptionHandler.cs"
+            }
             var response = await _userService.RegisterAsync(request);
             return Ok(response);
         }
@@ -30,6 +34,10 @@ namespace BitsionTest.API.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] UserLoginRequest request)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var response = await _userService.LoginAsync(request);
             return Ok(response);
         }
@@ -39,6 +47,10 @@ namespace BitsionTest.API.Controllers
         [Authorize]
         public async Task<IActionResult> GetById(Guid id)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var response = await _userService.GetByIdAsync(id);
             return Ok(response);
         }
@@ -48,6 +60,10 @@ namespace BitsionTest.API.Controllers
         [Authorize]
         public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenRequest request)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var response = await _userService.RefreshTokenAsync(request);
             return Ok(response);
         }
@@ -57,8 +73,12 @@ namespace BitsionTest.API.Controllers
         [Authorize]
         public async Task<IActionResult> RevokeRefreshToken([FromBody] RefreshTokenRequest request)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var response = await _userService.RevokeRefreshToken(request);
-            if (response != null && response.Message == "Refresh token revoked successfully")
+            if (response != null && response.Message == "Refresh token revocado exitosamente")
             {
                 return Ok(response);
             }
@@ -79,6 +99,10 @@ namespace BitsionTest.API.Controllers
         [Authorize]
         public async Task<IActionResult> Delete(Guid id)
         {
+            if (id == Guid.Empty)
+            {
+                return BadRequest("El ID proveído no es válido.");
+            }
             await _userService.DeleteAsync(id);
             return Ok();
         }
