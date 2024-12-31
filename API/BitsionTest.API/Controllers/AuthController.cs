@@ -19,7 +19,7 @@ namespace BitsionTest.API.Controllers
 
 
         [HttpPost("register")]
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")] // sólo el administrador puede registrar usuarios
         public async Task<IActionResult> Register([FromBody] UserRegisterRequest request)
         {
             if (!ModelState.IsValid)
@@ -85,7 +85,7 @@ namespace BitsionTest.API.Controllers
             return BadRequest(response);
         }
 
-
+        // devuelve el usuario actual logueado
         [HttpGet("current-user")]
         [Authorize]
         public async Task<IActionResult> GetCurrentUser()
