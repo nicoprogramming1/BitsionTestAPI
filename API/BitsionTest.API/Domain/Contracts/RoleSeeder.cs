@@ -9,7 +9,7 @@ namespace BitsionTest.API.Domain.Contracts
         public static async Task SeedRolesAndAdminUser(IServiceProvider serviceProvider)
         {
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-            var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
+            var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
             // Creamos los dos roles de usuarios!
             string[] roles = { "Admin", "User" };
