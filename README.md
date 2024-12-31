@@ -1,9 +1,22 @@
 # Bitsion-technical-test-WN
 This project is developed for a Bitsion technical test - Author: WN
 
+## BACKEND - ASP.NET CORE 8
+
 # Decisiones Técnicas
 
 A continuación se exponen aquellas decisiones técnicas implementadas a lo largo del desarrollo y el presente análisis, junto con las observaciones que llevaron a considerarlas.
+
+### Paquetes
+
+- AutoMapper: para mapear objetos y DTOs de manera estandarizada y reduciendo código repetitivo.
+- Identity: para gestionar usuarios, autenticaciones, tokens, roles; de manera robusta y flexible.
+
+### Patterns
+
+A continuación se presentan los patterns o patrones utilizados de manera consciente (los que soy capaz de reconocer e implementar por decisión consciente):
+
+- Patrón de Diseño Dependency Injection (o Dependency Inversion) para eliminar dependencias hard-codeadas o instanciadas en los objetos por una inyección desde una locación central a pedido cumpliendo de esta manera con la "D" de los principios SOLID.
 
 ### SQLServer
 
@@ -26,7 +39,8 @@ Este atributo en un cliente indica si el cliente ha sido eliminado del sistema e
 Respecto a entidades tales como Roles, Phone, Nationality, State y Email.
 Plantié tres posibilidades para su implementación, quedándome con la primera:
 
-**- Usar tablas en la base de datos (Con FK y normalización)**
+**
+- Usar tablas en la base de datos (Con FK y normalización)**
 Creo que es la forma más escalable y flexible, en especial para Roles. Si éstos luego deben ser modificados o agregados nuevos, considero es el mejor enfoque, por más que en un proyecto pequeño incremente el tamaño del mismo y la cantidad de código utilizado.
 
 - Usar enum
