@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using BitsionTest.API.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace BitsionTest.API.Domain.Contracts
 {
@@ -24,7 +25,7 @@ namespace BitsionTest.API.Domain.Contracts
             var adminUser = await userManager.FindByEmailAsync("admin@bitsion.com");
             if (adminUser == null)
             {
-                var user = new IdentityUser
+                var user = new ApplicationUser
                 {
                     Email = "admin@bitsion.com",
                     UserName = "admin@bitsion.com", // usamos el email como UserName
