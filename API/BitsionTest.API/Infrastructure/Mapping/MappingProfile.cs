@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using BitsionTest.API.Models.Domain.Contracts;
-using BitsionTest.API.Models.Domain.Entities;
+using BitsionTest.API.Domain.Contracts;
+using BitsionTest.API.Domain.Entities;
 
 namespace BitsionTest.API.Infrastructure.Mapping
 {
