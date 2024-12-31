@@ -27,8 +27,10 @@ namespace BitsionTest.API.Domain.Contracts
                 var user = new IdentityUser
                 {
                     Email = "admin@bitsion.com",
+                    UserName = "admin@bitsion.com", // usamos el email como UserName
                     EmailConfirmed = true
                 };
+
                 var result = await userManager.CreateAsync(user, "Admin123");
                 if (result.Succeeded)
                 {

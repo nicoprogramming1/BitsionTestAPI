@@ -40,6 +40,9 @@ namespace BitsionTest.API.Services.Implementation
 
             var newUser = _mapper.Map<ApplicationUser>(request);
 
+            // Configuramos manualmente el UserName como el email
+            newUser.UserName = request.Email;
+
             var result = await _userManager.CreateAsync(newUser, request.Password);
             if (!result.Succeeded)
             {

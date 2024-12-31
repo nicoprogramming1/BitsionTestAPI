@@ -50,7 +50,8 @@ namespace BitsionTest.API.Services.Implementation
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, user?.Id ?? string.Empty),
-                new Claim(ClaimTypes.Email, user?.Email ?? string.Empty)
+                new Claim(ClaimTypes.Email, user?.Email ?? string.Empty),
+                new Claim(ClaimTypes.Role, "User")
             };
 
             var roles = await _userManager.GetRolesAsync(user);
