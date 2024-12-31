@@ -22,13 +22,13 @@ namespace BitsionTest.API.Domain.Contracts
             }
 
             // Creamos un usuario con rol administrador solo si no existe
-            var adminUser = await userManager.FindByEmailAsync("admin@bitsion.com");
+            var adminUser = await userManager.FindByEmailAsync("admin@ficticia.com");
             if (adminUser == null)
             {
                 var user = new ApplicationUser
                 {
-                    Email = "admin@bitsion.com",
-                    UserName = "admin@bitsion.com", // usamos el email como UserName
+                    Email = "admin@ficticia.com",
+                    UserName = "admin@ficticia.com", // usamos el email como UserName
                     EmailConfirmed = true
                 };
 
