@@ -10,7 +10,7 @@ namespace BitsionTest.API.Domain.Contracts
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
 
-            // Creamos los dos roles
+            // Creamos los dos roles de usuarios!
             string[] roles = { "Admin", "User" };
             foreach (var role in roles)
             {
@@ -20,7 +20,7 @@ namespace BitsionTest.API.Domain.Contracts
                 }
             }
 
-            // Crear un usuario administrador si no existe
+            // Creamos un usuario con rol administrador solo si no existe
             var adminUser = await userManager.FindByEmailAsync("admin@bitsion.com");
             if (adminUser == null)
             {
