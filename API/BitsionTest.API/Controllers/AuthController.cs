@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace BitsionTest.API.Controllers
 {
     [ApiController]
-    [Route("api/")]
+    [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
         private readonly IUserService _userService;
