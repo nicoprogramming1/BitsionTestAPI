@@ -3,6 +3,8 @@ using BitsionTest.API.Domain.Contracts;
 using BitsionTest.API.Domain.Entities;
 using BitsionTest.API.Repositories.Interface;
 using BitsionTest.API.Services.Interface;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.Security.Cryptography;
 using System.Text;
@@ -16,14 +18,16 @@ namespace BitsionTest.API.Services.Implementation
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
         private readonly ILogger<UserServiceImpl> _logger;
+        private readonly IServiceProvider _serviceProvider;
 
-        public UserServiceImpl(ITokenService tokenService, ICurrentUserService currentUserService, IUserRepository userRepository, IMapper mapper, ILogger<UserServiceImpl> logger)
+        public UserServiceImpl(ITokenService tokenService, ICurrentUserService currentUserService, IUserRepository userRepository, IMapper mapper, ILogger<UserServiceImpl> logger, IServiceProvider serviceProvider)
         {
             _tokenService = tokenService;
             _currentUserService = currentUserService;
             _userRepository = userRepository;
             _mapper = mapper;
             _logger = logger;
+            _serviceProvider = serviceProvider;
         }
 
         public async Task<UserResponse> RegisterAsync(UserRegisterRequest request)
@@ -45,8 +49,18 @@ namespace BitsionTest.API.Services.Implementation
             await _tokenService.GenerateToken(createdUser);
             createdUser.CreatedAt = DateTime.Now;
 
+            // Asignamos el rol User por default al momento del registro
+            var userManager = _serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+            var user = await userManager.FindByEmailAsync(createdUser.Email);
+            if (user != null && !await userManager.IsInRoleAsync(user, "User"))
+            {
+                await userManager.AddToRoleAsync(user, "User");
+            }
+
             return _mapper.Map<UserResponse>(createdUser);
         }
+
 
         public async Task<UserResponse> LoginAsync(UserLoginRequest request)
         {
