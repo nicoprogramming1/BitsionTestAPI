@@ -1,4 +1,4 @@
-﻿using BitsionTest.API.Models.Domain.Entities;
+﻿using BitsionTest.API.Domain.Entities;
 
 namespace BitsionTest.API.Services.Interface
 {
