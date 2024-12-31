@@ -30,10 +30,10 @@ namespace BitsionTest.API.Extensions
             services.AddIdentityCore<IdentityUser>(o =>
             {
                 o.Password.RequireNonAlphanumeric = false;
-                o.Password.RequireDigit = true;
-                o.Password.RequireLowercase = true;
+                o.Password.RequireDigit = false;
+                o.Password.RequireLowercase = false;
                 o.Password.RequireUppercase = false;
-                o.Password.RequiredLength = 8;
+                o.Password.RequiredLength = 8;  // Solo longitud mínima para la pass
             }).AddEntityFrameworkStores<ApplicationDbContext>()
               .AddDefaultTokenProviders();
         }
