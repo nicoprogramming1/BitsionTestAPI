@@ -1,9 +1,16 @@
 # Bitsion-technical-test-WN
 This project is developed for a Bitsion technical test - Author: WN
 
+## BACKEND - ASP.NET CORE 8
+
 # Decisiones Técnicas
 
 A continuación se exponen aquellas decisiones técnicas implementadas a lo largo del desarrollo y el presente análisis, junto con las observaciones que llevaron a considerarlas.
+
+### Paquetes
+
+- AutoMapper: para mapear objetos y DTOs de manera estandarizada y reduciendo código repetitivo.
+- Identity: para gestionar usuarios, autenticaciones, tokens, roles; de manera robusta y flexible.
 
 ### Patterns
 
