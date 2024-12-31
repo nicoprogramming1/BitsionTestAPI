@@ -83,7 +83,7 @@ namespace BitsionTest.API.Services.Implementation
             using var sha256 = SHA256.Create();
             var refreshTokenHash = sha256.ComputeHash(Encoding.UTF8.GetBytes(refreshToken));
             user.RefreshToken = Convert.ToBase64String(refreshTokenHash);
-            user.RefreshTokenExpiryTime = DateTime.Now.AddDays(2);
+            user.RefreshTokenExpiryTime = DateTime.Now.AddDays(2);  // 2 dias es el tiempo de expiración
 
             user.CreatedAt = DateTime.Now;
             var result = await _userRepository.UpdateUserAsync(user);
@@ -95,6 +95,7 @@ namespace BitsionTest.API.Services.Implementation
             return userResponse;
         }
 
+        // recibe un id y devuelve el user if founded
         public async Task<UserResponse> GetByIdAsync(Guid id)
         {
             _logger.LogInformation("Recuperando usuario por id");
