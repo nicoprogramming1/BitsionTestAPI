@@ -10,6 +10,7 @@ using BitsionTest.API.Services.Implementation;
 using BitsionTest.API.Services.Interface;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,7 +19,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHttpContextAccessor();  // inyectamos el servicio para acceder a los datos Http como headers, user, etc
 builder.Services.AddProblemDetails();  // inyectamos el servicio que estructura errores HTTP en las responses (especificación RFC 7807)
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>(); // inyectamos nuestro global exception handler
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+        options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase);   // convert responses a camelCase
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -59,7 +63,7 @@ builder.Services.ConfigureCors();
 
 var app = builder.Build();
 
-// Seeding roles y usuario administrador
+// Seeding roles y usuario administrador generado automáticamente
 using (var scope = app.Services.CreateScope())
 {
     var serviceProvider = scope.ServiceProvider;
