@@ -25,6 +25,7 @@ namespace BitsionTest.API.Extensions
         }
 
 
+        // establecemos las especificaciones que debe cumplir la contraseña
         public static void ConfigureIdentity(this IServiceCollection services)
         {
             services.AddIdentityCore<IdentityUser>(o =>
