@@ -10,6 +10,10 @@ namespace BitsionTest.API.Infrastructure.Mapping
             CreateMap<ApplicationUser, UserResponse>();
             CreateMap<ApplicationUser, CurrentUserResponse>();
             CreateMap<UserRegisterRequest, ApplicationUser>();
+            CreateMap<Client, ClientResponse>();
+            CreateMap<ClientRegisterRequest, Client>();
+            CreateMap<ClientUpdateRequest, Client>();
+            CreateMap<ClientDeleteRequest, Client>();
         }
     }
 }
