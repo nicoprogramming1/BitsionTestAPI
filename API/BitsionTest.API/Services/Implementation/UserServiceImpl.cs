@@ -47,7 +47,7 @@ namespace BitsionTest.API.Services.Implementation
             _logger.LogInformation("Usuario creado con éxito");
 
             await _tokenService.GenerateToken(createdUser);
-            createdUser.CreatedAt = DateTime.Now;
+            createdUser.CreatedAt = DateTime.Now;   // timestamp de creación de user
 
             // Asignamos el rol User por default al momento del registro
             var userManager = _serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
