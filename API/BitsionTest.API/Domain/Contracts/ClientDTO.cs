@@ -122,6 +122,16 @@ namespace BitsionTest.API.Domain.Contracts
         public string? OtherDiseases { get; set; }
     }
 
+    public class ClientsListResponse
+    {
+        public ClientResponse[] Clients { get; set; }
+        public int TotalCount { get; set; }  // Total de clientes disponibles
+        public int PageNumber { get; set; }  // Página actual
+        public int PageSize { get; set; }    // Cantidad de elementos por página
+    }
+
+
+
     // igual al ClientRegisterRequest debido al método PUT
     public class ClientUpdateRequest
     {
