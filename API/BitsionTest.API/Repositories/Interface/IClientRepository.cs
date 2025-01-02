@@ -1,4 +1,5 @@
-﻿using BitsionTest.API.Domain.Entities;
+﻿using BitsionTest.API.Domain.Contracts;
+using BitsionTest.API.Domain.Entities;
 using static ClientRepository;
 
 namespace BitsionTest.API.Repositories.Interface
