@@ -14,12 +14,12 @@ This project is developed for **Bitsion** Test - Author: **WN**
 
 A continuación se exponen aquellas decisiones técnicas implementadas a lo largo del desarrollo y el presente análisis, junto con las observaciones que llevaron a considerarlas.
 
+- Al iniciar la aplicación se crea por defecto un usuario con rol "Admin" (email: "admin@ficticia.com", password: "Admin123") el cual puede ser utilizado para acceder y registrar nuevos usuarios con rol "User".
 - Se utiliza DataAnnotations para las validaciones de los DTOs en las request.
 - Se implementa un Exceptions/GlobalExceptionHandler para gestionar excepciones de manera global.
 - La aplicación es desarrollada en 3 capas (controlador, servicio, repositorio).
 - Sólo el Administrador es capaz de crear nuevos usuarios (por defecto se crean con rol "User").
 - Respecto al CRUD de users, sólo se implementa el registro (en los servicios está también el delete, lo hice sin querer pero ya que está lo dejo aunque no será implementado).
-- Al iniciar la aplicación se crea por defecto un usuario con rol "Admin" (email: "admin@bitsion.com", password: "Admin123") el cual puede ser utilizado para acceder y registrar nuevos usuarios con rol "User".
 - Se implementarán Timestamps para las entidades ApplicationUser y Client de dos formas distintas para mostrar flexibilidad, cada una tiene sus pro y sus contra:
   1. **ApplicationUser:** como no se implementará el update de un usuario, sólo existirá el CreatedAt el cual será especificado de forma manual -> "createdUser.CreatedAt = DateTime.Now;"   en el RegisterAsync() del "../Services/Implementation/UserServiceImpl.cs"
   De esta manera se tiene un control de cómo y cuando se gestiona con poca complejidad técnica, pero también resulta en código repetitivo propenso a errores.
