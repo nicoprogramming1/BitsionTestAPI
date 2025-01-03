@@ -51,12 +51,13 @@ namespace BitsionTest.API.Services.Implementation
             {
                 new Claim(ClaimTypes.NameIdentifier, user?.Id ?? string.Empty),
                 new Claim(ClaimTypes.Email, user?.Email ?? string.Empty),
-                new Claim(ClaimTypes.Role, "User"), // por defecto es "User"
                 new Claim(ClaimTypes.Name, user?.Email ?? string.Empty) // el email es el username
             };
 
             var roles = await _userManager.GetRolesAsync(user);
-            claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
+            var singleRole = roles.FirstOrDefault() ?? "User"; // Obtenemos el primer rol o usamos "User" por defecto
+            claims.Add(new Claim(ClaimTypes.Role, singleRole)); // Solo un rol agregado como claim
+
 
             return claims;
         }
