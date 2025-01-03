@@ -2,8 +2,6 @@
 using BitsionTest.API.Repositories.Interface;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BitsionTest.API.Repositories.Implementation
 {
