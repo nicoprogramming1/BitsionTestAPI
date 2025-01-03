@@ -44,6 +44,8 @@ public class ClientRepository : IClientRepository
         return true;
     }
 
+
+
     public async Task<Client> GetClientByEmailAsync(string email)
     {
         if (string.IsNullOrEmpty(email))
@@ -55,25 +57,42 @@ public class ClientRepository : IClientRepository
                ?? throw new KeyNotFoundException("No se encontró un cliente con este email.");
     }
 
+
+
     public async Task<Client> GetClientByIdAsync(Guid id)
     {
         return await dbContext.Clients.FirstOrDefaultAsync(c => c.Id == id)
                ?? throw new KeyNotFoundException("No se encontró un cliente con el ID especificado.");
     }
 
-    public async Task<PaginatedList<Client>> GetClientsListAsync(int pageNumber, int pageSize)
-    {
-        var totalCount = await dbContext.Clients.CountAsync();
 
-        // filtra los clientes correspondientes a la página solicitada
-        var clients = await dbContext.Clients
+
+    public async Task<PaginatedList<Client>> GetClientsListAsync(int pageNumber, int pageSize, string longName, string email)
+    {
+        var query = dbContext.Clients.AsQueryable();
+
+        // esto filtra por nombre o email
+        if (!string.IsNullOrEmpty(longName))
+        {
+            query = query.Where(c => c.LongName.Contains(longName));
+        }
+
+        if (!string.IsNullOrEmpty(email))
+        {
+            query = query.Where(c => c.Email.Contains(email));
+        }
+
+        var totalCount = await query.CountAsync();
+
+        // filtra por página
+        var clients = await query
             .Skip((pageNumber - 1) * pageSize)  // salta los registros de las páginas anteriores
-            .Take(pageSize)                     // acá toma solo la cantidad de clientes correspondiente a la página
+            .Take(pageSize)                     // toma solo la cantidad de clientes correspondiente a la página
             .ToListAsync();
 
-        // instanciamos una nueva PaginatedList y la retornamos
         return new PaginatedList<Client>(clients, totalCount, pageNumber, pageSize);
     }
+
 
 
     public async Task<bool> UpdateClientAsync(Client client)
@@ -84,30 +103,20 @@ public class ClientRepository : IClientRepository
             throw new KeyNotFoundException("El cliente especificado no existe.");
         }
 
-        // verificamos si el email ya existe exceptuando el del cliente que estamos actualizando
+        // comprobamos que el mail no esté registrado en otro cliente filtrando el cliente que actualizamos
         var emailConflict = await dbContext.Clients.AnyAsync(c => c.Email == client.Email && c.Id != client.Id);
         if (emailConflict)
         {
             throw new InvalidOperationException("Ya existe un cliente con este email.");
         }
 
-        existingClient.LongName = client.LongName;
-        existingClient.Age = client.Age;
-        existingClient.Gender = client.Gender;
-        existingClient.Email = client.Email;
-        existingClient.Nationality = client.Nationality;
-        existingClient.State = client.State;
-        existingClient.Phone = client.Phone;
-        existingClient.CanDrive = client.CanDrive;
-        existingClient.WearGlasses = client.WearGlasses;
-        existingClient.IsDiabetic = client.IsDiabetic;
-        existingClient.OtherDiseases = client.OtherDiseases;
+        // mapeamos a cliente los datos a actualizar
+        dbContext.Entry(existingClient).CurrentValues.SetValues(client);
 
-        dbContext.Clients.Update(existingClient);
         await dbContext.SaveChangesAsync();
-
         return true;
     }
+
 
 
 }
