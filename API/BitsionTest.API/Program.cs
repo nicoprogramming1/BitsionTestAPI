@@ -78,6 +78,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.Use(async (context, next) =>
+{
+    var request = context.Request;
+    var headers = string.Join(", ", request.Headers.Select(h => $"{h.Key}: {h.Value}"));
+    Console.WriteLine($"Request: {request.Method} {request.Path}, Headers: {headers}");
+    await next.Invoke();
+});
+
 
 app.UseHttpsRedirection();
 app.UseAuthentication();
