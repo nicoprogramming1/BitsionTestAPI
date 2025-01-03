@@ -2,21 +2,11 @@
 # Bitsion-Test-WN
 This project is developed for **Bitsion** Test - Author: **WN**
 
-# ANÁLISIS FUNCIONAL - **FICTICIA SRL**
+# **FICTICIA SRL**
 
 - Los usuarios son registrado predeterminadamente con el rol de "User", limitando sus funcionalidades sólo a la Gestión de Clientes y a la autenticación
 - El usuario Administrador "Admin" puede implementar todas las funcionalidades tanto de la Gestión de Clientes como de Usuarios (es quien puede registrar un nuevo usuario)
 - Los clientes poseen un atributo isDeleted para gestionar su eliminación lógica
-- 
-
-
-
-# FRONTEND - TYPESCRIPT | ANGULAR 18 - Visual Studio Code
-
-## Decisiones Técnicas
-
-
-
 
 # BACKEND - C# | ASP.NET CORE 8 - Visual Studio Community 2022
 
@@ -44,16 +34,6 @@ A continuación se exponen aquellas decisiones técnicas implementadas a lo larg
 - Identity: para gestionar usuarios, autenticaciones, tokens, roles; de manera robusta y flexible
 - JwtBearer: para implementar tokens de usuarios
 - EntityFrameworkCore: ORM para gestionar y mapear entidades a la base de datos, además de las consultas para actualizar/consultar información en persistencia
-
-### Patterns
-
-A continuación se presentan los patterns o patrones utilizados de manera consciente (los que soy capaz de reconocer e implementar por decisión consciente):
-
-S - 
-O - 
-L - 
-I - 
-D - Patrón de Diseño Dependency Injection (o Dependency Inversion) para eliminar dependencias hard-codeadas o instanciadas en los objetos por una inyección desde una locación central a pedido cumpliendo de esta manera con la "D" de los principios SOLID
 
 ### SQLServer
 
