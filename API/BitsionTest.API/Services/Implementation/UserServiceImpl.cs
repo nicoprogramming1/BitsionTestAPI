@@ -4,8 +4,6 @@ using BitsionTest.API.Domain.Entities;
 using BitsionTest.API.Repositories.Interface;
 using BitsionTest.API.Services.Interface;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using System.Security.Cryptography;
 using System.Text;
 
