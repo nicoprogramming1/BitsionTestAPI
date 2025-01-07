@@ -1,3 +1,4 @@
+
 # Bitsion-Test-WN
 This project is developed for **Bitsion** Test - Author: **WN**
 
@@ -70,3 +71,4 @@ Los modelos serán definidos mediante clases en C# usando el enfoque de CodeFirs
 
 Este atributo en un cliente indica si el cliente ha sido eliminado del sistema en caso de true. Un cliente se registra con este atributo false por defecto y al momento de la eliminación lógica se cambia a true, esto conlleva que dicho cliente será ignorado por las consultas realizadas contra el backend (consultar cliente, listar clientes) resultando en un 404. El front puede abstraerse totalmente de este atributo.
 Esto se ve reflejado en el ApplicationDbContext.cs -> Método OnModelCreating -> builder.Entity<Client>().HasQueryFilter(c => !c.isDeleted);
+
