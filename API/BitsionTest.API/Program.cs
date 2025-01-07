@@ -46,6 +46,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 builder.Services.AddScoped<IUserService, UserServiceImpl>();
 builder.Services.AddScoped<ITokenService, TokenServiceImpl>();
 builder.Services.AddScoped<ICurrentUserService, CurrentUserServiceImpl>();
+builder.Services.AddScoped<IClientService, ClientServiceImpl>();
 
 // Repositories
 builder.Services.AddScoped<IClientRepository, ClientRepository>();
