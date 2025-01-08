@@ -15,7 +15,7 @@
         public bool IsDiabetic { get; set; }
         public string? OtherDiseases { get; set; }
         public bool isDeleted { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
+        //public DateTime CreatedAt { get; set; }
+        //public DateTime UpdatedAt { get; set; }
     }
 }
