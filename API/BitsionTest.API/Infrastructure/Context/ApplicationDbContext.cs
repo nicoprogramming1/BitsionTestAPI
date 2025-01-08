@@ -26,16 +26,16 @@ namespace BitsionTest.API.Infrastructure.Context
 
         public override int SaveChanges()
         {
-            HandleTimestamps();
+            //HandleTimestamps();
             return base.SaveChanges();
         }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-            HandleTimestamps();
+            //HandleTimestamps();
             return await base.SaveChangesAsync(cancellationToken);
         }
-
+        /**
         private void HandleTimestamps()
         {
             var entries = ChangeTracker.Entries().Where(e => e.Entity is Client &&
@@ -51,5 +51,6 @@ namespace BitsionTest.API.Infrastructure.Context
                 ((Client)entry.Entity).UpdatedAt = DateTime.UtcNow;
             }
         }
+        */
     }
 }
