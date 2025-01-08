@@ -8,7 +8,7 @@ namespace BitsionTest.API.Repositories.Interface
     {
         Task<Client> CreateClientAsync(Client client);
         Task<Client> GetClientByIdAsync(Guid id);
-        Task<Client> GetClientByEmailAsync(string email);
+        Task<Client?> GetClientByEmailAsync(string email);
         Task<PaginatedList<Client>> GetClientsListAsync(int pageNumber, int pageSize, string longName, string email);
 
         Task<bool> UpdateClientAsync(Client client);

@@ -46,16 +46,17 @@ public class ClientRepository : IClientRepository
 
 
 
-    public async Task<Client> GetClientByEmailAsync(string email)
+    public async Task<Client?> GetClientByEmailAsync(string email)
     {
         if (string.IsNullOrEmpty(email))
         {
             throw new ArgumentException("El email es obligatorio.");
         }
 
-        return await dbContext.Clients.FirstOrDefaultAsync(c => c.Email == email)
-               ?? throw new KeyNotFoundException("No se encontró un cliente con este email.");
+        // si no se encuentra un cliente, se devuelve null para no romper el flujo (antes largaba una excepción)
+        return await dbContext.Clients.FirstOrDefaultAsync(c => c.Email == email);
     }
+
 
 
 
