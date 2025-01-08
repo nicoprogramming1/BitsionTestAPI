@@ -98,6 +98,10 @@ namespace BitsionTest.API.Domain.Contracts
         [StringLength(500, ErrorMessage = "No debe superar los 500 caracteres.")]
         public string? OtherDiseases { get; set; }
 
+        //public DateTime? CreatedAt { get; set; }
+
+        //public DateTime? UpdatedAt { get; set; }
+
     }
 
     /**
