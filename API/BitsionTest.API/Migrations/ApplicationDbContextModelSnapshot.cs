@@ -108,9 +108,6 @@ namespace BitsionTest.API.Migrations
                     b.Property<bool>("CanDrive")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -139,9 +136,6 @@ namespace BitsionTest.API.Migrations
                     b.Property<string>("State")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
 
                     b.Property<bool>("WearGlasses")
                         .HasColumnType("bit");

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BitsionTest.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250102020453_Initial Migration")]
-    partial class InitialMigration
+    [Migration("20250108112839_Second migration")]
+    partial class Secondmigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -111,9 +111,6 @@ namespace BitsionTest.API.Migrations
                     b.Property<bool>("CanDrive")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -142,9 +139,6 @@ namespace BitsionTest.API.Migrations
                     b.Property<string>("State")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
 
                     b.Property<bool>("WearGlasses")
                         .HasColumnType("bit");
