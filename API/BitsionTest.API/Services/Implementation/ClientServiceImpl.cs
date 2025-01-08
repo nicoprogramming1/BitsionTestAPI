@@ -34,6 +34,11 @@ namespace BitsionTest.API.Services.Implementation
                     throw new InvalidOperationException("El cliente con ese email ya está registrado.");
                 }
 
+
+                // asignamos las fechas de creación/modificación
+                //request.CreatedAt = DateTime.UtcNow;
+                //request.UpdatedAt = DateTime.UtcNow;
+
                 var newClient = _mapper.Map<Client>(request);
 
                 var createdClient = await _clientRepository.CreateClientAsync(newClient);
