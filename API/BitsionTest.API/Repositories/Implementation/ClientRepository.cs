@@ -31,7 +31,33 @@ public class ClientRepository : IClientRepository
         return client;
     }
 
+
+    // soft delete, cambia el isDeleted de un client a true de forma tal que sea filtrado
+    // todas las querys quedando "marcado" como inactivo o borrado
     public async Task<bool> DeleteClientAsync(Guid id)
+    {
+        var client = await dbContext.Clients.FirstOrDefaultAsync(c => c.Id == id);
+        if (client == null)
+        {
+            throw new KeyNotFoundException("No se encontró el cliente con el ID especificado.");
+        }
+
+        // cambiamos el estado a true para lograr la eliminación lógica
+        client.isDeleted = true;
+
+        // mapeamos a cliente los datos a actualizar
+        dbContext.Entry(client).CurrentValues.SetValues(client);
+        await dbContext.SaveChangesAsync();
+        return true;
+    }
+
+
+    /**
+     * 
+     * Como vamos a implementar una eliminación lógica, no es necesario este método para un delete completo
+     * pero lo lo había hecho en primera instancia y lo dejo a modo de ofrecer una alternativa viable
+     * 
+     * public async Task<bool> DeleteClientAsync(Guid id)
     {
         var client = await dbContext.Clients.FirstOrDefaultAsync(c => c.Id == id);
         if (client == null)
@@ -43,19 +69,21 @@ public class ClientRepository : IClientRepository
         await dbContext.SaveChangesAsync();
         return true;
     }
+     */
 
 
 
-    public async Task<Client> GetClientByEmailAsync(string email)
+    public async Task<Client?> GetClientByEmailAsync(string email)
     {
         if (string.IsNullOrEmpty(email))
         {
             throw new ArgumentException("El email es obligatorio.");
         }
 
-        return await dbContext.Clients.FirstOrDefaultAsync(c => c.Email == email)
-               ?? throw new KeyNotFoundException("No se encontró un cliente con este email.");
+        // si no se encuentra un cliente, se devuelve null para no romper el flujo (antes largaba una excepción)
+        return await dbContext.Clients.FirstOrDefaultAsync(c => c.Email == email);
     }
+
 
 
 
