@@ -29,7 +29,7 @@ namespace BitsionTest.API.Domain.Contracts
 
     // CUSTOM VALIDATORS
 
-    // esta clase valida que si se escribe en el campo otras enfermedades no sean sólo espacios en blanco
+    // esta clase valida que si se escribe en el campo otras enfermedades no sean sólo espacios en blanco (no debe estar acá, mover)
     public class DiseaseWithoutBlankSpacesAttribute : ValidationAttribute
     {
         public override bool IsValid(object value)

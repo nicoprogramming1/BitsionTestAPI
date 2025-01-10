@@ -72,7 +72,7 @@ namespace BitsionTest.API.Repositories.Implementation
 
         /*
          * Este método elimina el rol de un usuario
-         * No será implementado en esta prueba técnica
+         * No será implementado en esta prueba técnica por falta de tiempo pero ya que lo hice lo dejo
          * 
         public async Task RemoveUserFromRoleAsync(ApplicationUser user, string role)
         {

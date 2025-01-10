@@ -90,7 +90,7 @@ builder.Services.AddScoped<IUserRepository, UserRepositoryImpl>();
 builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
 
 
-// Del ApplicationService agregamos Jwt
+// Del ApplicationService agregamos Jwt (esto lo inyectamos de esta manera porqe la clase es partial)
 builder.Services.ConfigureIdentity();
 builder.Services.ConfigureJwt(builder.Configuration);
 builder.Services.ConfigureCors();
