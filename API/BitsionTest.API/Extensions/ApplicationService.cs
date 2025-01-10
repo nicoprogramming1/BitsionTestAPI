@@ -10,16 +10,16 @@ namespace BitsionTest.API.Extensions
     public static partial class ApplicationService
     {
 
-        // Dejamos pasar headers metodos y cualquier origen
+        // Dejamos pasar headers metodos y cualquier origen del puerto 4200 (no afecta swagger ni postman)
         public static void ConfigureCors(this IServiceCollection services)
         {
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy", builder =>
                 {
-                    builder.AllowAnyOrigin()
-                        .AllowAnyMethod()
-                        .AllowAnyHeader();
+                    builder.WithOrigins("http://localhost:4200")
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
                 });
             });
         }

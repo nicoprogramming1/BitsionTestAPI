@@ -19,7 +19,7 @@ namespace BitsionTest.API.Controllers
 
 
         [HttpPost("register")]
-        [Authorize(Roles = "Admin")] // sólo el administrador puede registrar usuarios
+        //[Authorize(Roles = "Admin")] // sólo el administrador puede registrar usuarios
         public async Task<IActionResult> Register([FromBody] UserRegisterRequest request)
         {
             if (!ModelState.IsValid)
@@ -44,7 +44,7 @@ namespace BitsionTest.API.Controllers
 
         // Get user por una id
         [HttpGet("user/{id}")]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> GetById(Guid id)
         {
             if (!ModelState.IsValid)
@@ -57,7 +57,7 @@ namespace BitsionTest.API.Controllers
 
         // Actualiza el access token a partir del refresh token
         [HttpPost("refresh-token")]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenRequest request)
         {
             if (!ModelState.IsValid)
@@ -70,7 +70,7 @@ namespace BitsionTest.API.Controllers
 
 
         [HttpPost("revoke-refresh-token")]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> RevokeRefreshToken([FromBody] RefreshTokenRequest request)
         {
             if (!ModelState.IsValid)
@@ -87,7 +87,7 @@ namespace BitsionTest.API.Controllers
 
         // devuelve el usuario actual logueado
         [HttpGet("current-user")]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> GetCurrentUser()
         {
             var response = await _userService.GetCurrentUserAsync();
@@ -96,7 +96,7 @@ namespace BitsionTest.API.Controllers
 
 
         [HttpDelete("user/{id}")]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Delete(Guid id)
         {
             if (id == Guid.Empty)
