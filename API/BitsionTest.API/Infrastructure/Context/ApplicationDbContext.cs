@@ -36,6 +36,7 @@ namespace BitsionTest.API.Infrastructure.Context
             return await base.SaveChangesAsync(cancellationToken);
         }
         /**
+         * a implementar
         private void HandleTimestamps()
         {
             var entries = ChangeTracker.Entries().Where(e => e.Entity is Client &&
