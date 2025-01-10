@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BitsionTest.API.Controllers
 {
-    [Authorize]
+    //
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ClientsController : ControllerBase
